@@ -9,6 +9,8 @@ import AdminSettings from "../admin-settings/AdminSettings";
 import right_caret from "../settings-home/assets/cheveron-right.svg";
 import classes from "../settings-home/SettingsHome.module.css";
 
+import { useTranslation } from "react-i18next";
+
 const randomizedGreeting = ["Hey there", "Welcome,", "¡Hola,"];
 
 const generateRandomNumber = (min, max) => {
@@ -23,6 +25,8 @@ const Home = () => {
     setGreeting(greetingProcedure);
   }, []);
 
+  const { t } = useTranslation();
+
   const user = getUser();
   return (
     <AdminSettings>
@@ -35,7 +39,14 @@ const Home = () => {
 
         <div className={classes.card}>
           <div className="mt-2">
-            <div className="" style={{ display: "flex", paddingLeft: "1.4em" }}>
+            <div
+              className=""
+              style={{
+                display: "flex",
+                paddingLeft: "1.4em",
+                alignItems: "center"
+              }}
+            >
               <div>
                 <span
                   className={classes.settings_icon_holder}
@@ -55,10 +66,9 @@ const Home = () => {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <h3> Settings & Permissions </h3>
+                  <h3>{t("settings_settings_home")}</h3>
                   <span className={classes.span_text}>
-                    Configure your workspace settings, permissions, and
-                    authentication preferences.
+                    {t("configure_settings_home")}
                   </span>
                 </div>
               </div>
@@ -71,7 +81,7 @@ const Home = () => {
             <Link
               to="/admin/settings/accountsProfile"
               className=""
-              style={{ display: "flex" }}
+              style={{ display: "flex", alignItems: "center" }}
             >
               <div>
                 <span
@@ -86,14 +96,15 @@ const Home = () => {
                 style={{
                   display: "flex",
                   alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
                   marginLeft: " 1em"
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <h3>Account Settings </h3>
+                  <h3>{t("account_settings_home")}</h3>
                   <span className={classes.span_text}>
-                    Edit your profile, update your username and password, and
-                    manage other account settings.
+                    {t("editprofile_settings_home")}
                   </span>
                 </div>
                 <div>
@@ -107,7 +118,7 @@ const Home = () => {
             style={{
               width: "calc(100% - 5%)",
               height: "0.5px",
-              margin: "2em auto"
+              margin: "1em auto"
             }}
           />
 
@@ -115,7 +126,7 @@ const Home = () => {
             <Link
               to="/admin/settings/ManageWorkspace"
               className=""
-              style={{ display: "flex" }}
+              style={{ display: "flex", alignItems: "center" }}
             >
               <div>
                 <span
@@ -136,9 +147,9 @@ const Home = () => {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <h3> Manage your workspace </h3>
+                  <h3> {t("manageworkspace_settings_home")} </h3>
                   <span className={classes.span_text}>
-                    Invite new members and manage user permissions
+                    {t("invite_settings_home")}
                   </span>
                 </div>
                 <div>
@@ -169,7 +180,7 @@ const Home = () => {
                 }}
               >
                 <Link to="/whyzurichat" target="_blank">
-                  Our Blog
+                  {t("blog_settings_home")}
                 </Link>
               </li>
               <li
@@ -178,7 +189,7 @@ const Home = () => {
                   margin: "0.75rem"
                 }}
               >
-                <Link to="/downloads">Download Apps</Link>
+                <Link to="/downloads">{t("downloads_settings_home")}</Link>
               </li>
             </div>
             <div className={classes.footer_links}>
@@ -188,7 +199,7 @@ const Home = () => {
                   margin: "0.75rem"
                 }}
               >
-                <Link to="/help">Help</Link>
+                <Link to="/help">{t("help_settings_home")}</Link>
               </li>
               <li
                 style={{
@@ -196,25 +207,7 @@ const Home = () => {
                   margin: "0.75rem"
                 }}
               >
-                <Link to="/legal">Brand Guidelines</Link>
-              </li>
-            </div>
-            <div className={classes.footer_links}>
-              <li
-                style={{
-                  display: "inline-block",
-                  margin: "0.75rem"
-                }}
-              >
-                <Link to="/contact-us">Contact</Link>
-              </li>
-              <li
-                style={{
-                  display: "inline-block",
-                  margin: "0.75rem"
-                }}
-              >
-                <Link to="/privacy">Policies</Link>
+                <Link to="/legal">{t("brandguide_settings_home")}</Link>
               </li>
             </div>
             <div className={classes.footer_links}>
@@ -224,7 +217,7 @@ const Home = () => {
                   margin: "0.75rem"
                 }}
               >
-                <Link to="/pricing">Pricing</Link>
+                <Link to="/contact-us">{t("contact_settings_home")}</Link>
               </li>
               <li
                 style={{
@@ -232,7 +225,25 @@ const Home = () => {
                   margin: "0.75rem"
                 }}
               >
-                <Link to="/signout">Sign Out</Link>
+                <Link to="/privacy">{t("policy_settings_home")}</Link>
+              </li>
+            </div>
+            <div className={classes.footer_links}>
+              <li
+                style={{
+                  display: "inline-block",
+                  margin: "0.75rem"
+                }}
+              >
+                <Link to="/pricing">{t("pricing_settings_home")}</Link>
+              </li>
+              <li
+                style={{
+                  display: "inline-block",
+                  margin: "0.75rem"
+                }}
+              >
+                <Link to="/signout">{t("signout_settings_home")}</Link>
               </li>
             </div>
           </ul>

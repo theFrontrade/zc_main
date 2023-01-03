@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import styles from "../settings-tab/SettingsTab.module.css";
 import TimeZone from "../time-zone/TimeZone";
@@ -9,14 +9,22 @@ import TwoFactor from "../two-factor/TwoFactor";
 import ChangeEmail from "../change-email/ChangeEmail";
 import Language from "../language/Language";
 import UserName from "../user-name/UserName";
-import { getUser } from "../settings-tab/utils/Common";
+import { getUser, getLanguage } from "../settings-tab/utils/Common";
+import { useTranslation } from "react-i18next";
 
 const SettingsTab = () => {
   const userData = getUser();
+  const lang = getLanguage();
+  const { t } = useTranslation();
+  const handleSignOut = () => {};
   return (
     <>
       <AnimateSharedLayout>
-        <PreferenceWrapper title="Password" text="" btnText="expand">
+        <PreferenceWrapper
+          title={t("password_settings_tab")}
+          text={t("change_password_settings_tab")}
+          btnText={t("expand_settings_tab")}
+        >
           {/* Password input goes uunder here */}
           <SavePassword />
         </PreferenceWrapper>
@@ -24,9 +32,9 @@ const SettingsTab = () => {
 
       <AnimateSharedLayout>
         <PreferenceWrapper
-          title="Two-Factor Authentication"
-          text="Two factor authentication is active for your account"
-          btnText="expand"
+          title={t("twofactor_settings_tab")}
+          text={t("active_settings_tab")}
+          btnText={t("expand_settings_tab")}
         >
           {/* Two factor authentication input field goes under here */}
           <TwoFactor />
@@ -35,9 +43,9 @@ const SettingsTab = () => {
 
       <AnimateSharedLayout>
         <PreferenceWrapper
-          title="Email Address"
-          text={`Your email address is ${userData.email}`}
-          btnText="expand"
+          title={t("email_settings_tab")}
+          text={`${t("mail_settings_tab")} ${userData.email}`}
+          btnText={t("expand_settings_tab")}
         >
           {/* Email address input field goes under here */}
           <ChangeEmail />
@@ -46,9 +54,9 @@ const SettingsTab = () => {
 
       <AnimateSharedLayout>
         <PreferenceWrapper
-          title="Time zone"
-          text={`Zurichat uses your time zone to send summary and notification emails, for times in your activity feeds and for  reminders. Your time zone is currently set to: (UTC+01:00) West Central, ${userData.time_zone}.`}
-          btnText="expand"
+          title={t("zone_settings_tab")}
+          text={`${t("time_settings_tab")} ${userData.time_zone}.`}
+          btnText={t("expand_settings_tab")}
         >
           {/* TimeZone input field goes under here */}
           <TimeZone />
@@ -57,9 +65,11 @@ const SettingsTab = () => {
 
       <AnimateSharedLayout>
         <PreferenceWrapper
-          title="Language"
-          text="Choose the language you’d like to use with Zurichat. Your language is currently set to: English (Nigeria)."
-          btnText="expand"
+          title={t("lang_settings_tab")}
+          text={`${t("chooselang_settings_tab")}  ${
+            lang.user.settings.languages_and_regions.language
+          }.`}
+          btnText={t("expand_settings_tab")}
         >
           {/* Language input field goes under here */}
           <Language />
@@ -67,49 +77,55 @@ const SettingsTab = () => {
       </AnimateSharedLayout>
 
       <div className={styles.settingsTab} id={styles.settingtab}>
-        <div className={styles.settingleft} id={styles.settingleft}>
-          Sign out all other sessions <br />
-          <span>
-            Lost your phone? Left yourself logged in on a public computer? Need
-            a way to sign out from everywhere except your current browser? Then
-            this is for you
-          </span>
+        <div
+          className={styles.settingleft}
+          id={styles.settingleft}
+          style={{ fontSize: "24px" }}
+        >
+          {t("sign_settings_tab")} <br />
+          <span style={{ fontSize: "18px" }}>{t("lost_settings_tab")}</span>
         </div>
         <div className={styles.settingsright}>
           <Link to="/session-signout">
-            <button className={styles.signout}>
-              Sign out of all othe sessions
+            <button onClick={handleSignOut} className={styles.signout}>
+              {t("signout_settings_tab")}
             </button>
           </Link>
         </div>
       </div>
 
       <div className={styles.settingsTab} id={styles.settingtab}>
-        <div className={styles.settingleft} id={styles.settingleft}>
-          Deactivate Account <br />
-          <span>
-            If you no longer need your account for the Zurichat, you can
-            deactivate your account. Any other Zurichat workspaces you belong to
-            will not be affected.
-          </span>
+        <div
+          className={styles.settingleft}
+          id={styles.settingleft}
+          style={{ fontSize: "24px" }}
+        >
+          {t("acc_settings_tab")} <br />
+          <span style={{ fontSize: "18px" }}>{t("zuri_settings_tab")}</span>
           <br />
-          <span>
-            <strong> Note:</strong> Don’t deactivate your account if you just
-            want to{" "}
+          <span style={{ fontSize: "18px" }}>
+            <strong> {t("note_settings_tab")}</strong>{" "}
+            {t("account_settings_tab")}{" "}
             <NavLink to="/" className={styles.emailLink}>
-              change your email address.
+              {t("change_settings_tab")}
             </NavLink>
           </span>
         </div>
         <div className={styles.settingsright}>
-          <Link to="/settings/confirm-password">
-            <button className={styles.delete}>Deactivate your account</button>
+          <Link to="/admin/settings/accountsProfile/account-deactivation">
+            <button className={styles.delete}>
+              {t("deactivate_settings_tab")}
+            </button>
           </Link>
         </div>
       </div>
 
       <AnimateSharedLayout>
-        <PreferenceWrapper title="Username" btnText="expand">
+        <PreferenceWrapper
+          title={t("user_settings_tab")}
+          text={t("change_username_settings_tab")}
+          btnText={t("expand_settings_tab")}
+        >
           {/* Username input field goes under here */}
           <UserName />
         </PreferenceWrapper>
